@@ -2,8 +2,8 @@
 
 module tb_reg_mem;
 
-    parameter DATA_WIDTH = 4; //4 bit wide data
-    parameter ADDR_BITS = 3; //8 Addresses
+    parameter DATA_WIDTH = 8; //8 bit wide data
+    parameter ADDR_BITS = 5; //32 Addresses
 
     reg [ADDR_BITS-1:0] addr;
     reg [DATA_WIDTH-1:0] data_in;

@@ -14,31 +14,30 @@ module tb_reg_mem;
     reg_mem #(DATA_WIDTH,ADDR_BITS) RM (addr, data_in, wen, clk, data_out);
 
     initial begin
-        /* For use in EDAPlayground
+        // For use in EDAPlayground
         $dumpfile("dump.vcd");
         $dumpvars(1, tb_reg_mem);
-        */
+        
         
         clk = 0;
         wen = 1;
        
-        //Write 10-17 to addresses 0-7 
-        for(integer i=10;i<18;i=i+1) 
+        //Write 10-41 to addresses 0-31
+      	for(int i=0;i<32;i=i+1) 
         begin
-            data_in = i; 
-            addr = (i+2);
+            data_in = i + 10;
+          	addr = i;
+          	repeat (2) #1 clk = ~clk;
             $display("Write %d to address %d",data_in,addr);
-            repeat (2) #1 clk = ~clk;
         end
         wen =0;
         #1;
-        //Read 10-17 from addresses 0-7 
-        for(integer i=10;i<18;i=i+1) 
+        //Read 10-41 from addresses 0-31
+      	for(int i=0;i<32;i=i+1) 
         begin
-            data_in = i; 
-            addr = (i+2);
-            $display("Read %d from address %d",data_in,addr);
-            repeat (2) #1 clk = ~clk;
+          addr = i;
+          repeat (2) #1 clk = ~clk;
+          $display("Read %d from address %d",data_out,addr);
         end
 
 
